@@ -39,11 +39,4 @@ else:
                 persona = "sexo no valido"
 
 #Mostrar resultado
-if saludo == "" and persona == "":
-    print("Momento y sexo no válidos")
-elif saludo == "":
-    print("Has puesto mal el momento del día")
-elif persona == "":
-    print("Has puesto mal el sexo")
-else:
-    print(saludo + " " + persona)
+print(saludo + " " + persona)

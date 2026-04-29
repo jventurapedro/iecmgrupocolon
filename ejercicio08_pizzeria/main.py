@@ -35,7 +35,7 @@ if(tipo == "si"):
     else:
         print("Error: ingrediente no valido")
 
-else:
+elif(tipo == "no"):
 
     print("Ingredientes: pepperoni, jamon, bacon, atun")
 
@@ -50,7 +50,10 @@ else:
         if(ing2 in no_vegetariana and ing2 != ing1):
             print("Pizza no vegetariana con mozzarella, tomate, " + ing1 + " y " + ing2)
         else:
-            print("Error: ingrediente no valido")
+            print("Error: ingrediente no valido o repetido")
 
     else:
         print("Error: ingrediente no valido")
+
+else:
+    print("Error: opcion no valida")
