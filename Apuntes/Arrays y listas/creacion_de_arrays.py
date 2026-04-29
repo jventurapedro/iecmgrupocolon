@@ -65,6 +65,22 @@ edades.remove(18)
 print(edades)       # Mostrará 20, 41, 6, 23, 10, 5, 18
 print("\n")
 
+# Quitar todos las coincidencias de una array. Con REMOVE se elimina la primera
+#       coinciencia que encuentre. Para ir eliminando mas de un valor
+#       hay que repetir el proceso, por ejemplo con While, hasta que no quede ningún número
+
+control = False
+while control == False:
+
+    control = True
+
+    if (18 in edades):
+        edades.remove(18)
+        control = False
+        
+print(edades)       # Mostrará 20, 41, 6, 23, 10, 5
+print("\n")
+
 # Sustituir elementos de un Array. Se puede hacer por sustitución
 #       directa, marcando el indice del valor a modificar y dándole
 #       otro valor.
