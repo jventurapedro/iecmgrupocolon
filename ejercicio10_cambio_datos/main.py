@@ -1,46 +1,61 @@
-import os 
+import os   
 os.system("cls")
 
-nombre = input("Introduce tu nombre: ")
-clave = input("Introduce una contraseña de 8 caracteres (con al menos una mayúscula, una minúscula y un número)")
+# Ejercicio 10 - Cambio de datos
 
-control = False
-while control == False:
-    
-    control = True
+#Aqui haremos WHILE
+while True:
+    nombre = input("Ingrese su nombre: ").strip()
+
+    # Validamos que el nombre no esté vacío ni contenga solo espacios
+    if nombre == "":
+        print("Error: el nombre no puede estar vacío")
+        continue  # vuelve al inicio del while 
+    # Si el nombre es correcto, salimos del bucle
+    break
+
+# Ahora pedimos la contraseña
+
+while True:
+    clave = input("Ingrese su contraseña: ").strip()
 
     tiene_mayuscula = False
     tiene_minuscula = False
     tiene_numero = False
 
-    if nombre == "":
-        print("El nombre no puede estar vacío")
-        control = False
-        
-
     if len(clave) < 8:
-        print("La contraseña debe tener al menos 8 caracteres")
-        control = False
+        print("Error: la contraseña debe tener al menos 8 caracteres")
+        continue
 
-        for c in clave:
-            if c.isupper():
-                tiene_mayuscula = True
-            elif c.islower():
-                tiene_minuscula = True
-            elif c.isdigit():
-                tiene_numero = True
+    for caracter in clave:
+        if caracter.isupper():
+            tiene_mayuscula = True
+        elif caracter.islower():
+            tiene_minuscula = True
+        elif caracter.isdigit():
+            tiene_numero = True
+        else: 
+            print("Error: la contraseña solo puede contener letras y números")
+            continue
 
-        if not tiene_mayuscula:
-            print("La contraseña debe contener al menos una letra mayúscula")
-            control = False
-        if not tiene_minuscula:
-            print("La contraseña debe contener al menos una letra minúscula")
-            control = False
-        if not tiene_numero:
-            print("La contraseña debe contener al menos un número")
-            control = False
+    if not tiene_mayuscula:
+        print("Error: la contraseña debe tener al menos una letra mayúscula")
+        continue
 
-        if control == False:
-            clave = input("\nIntroduce una contraseña de 8 caracteres (con al menos una mayúscula, una minúscula y un número)")
+    if not tiene_minuscula:
+        print("Error: la contraseña debe tener al menos una letra minúscula")
+        continue
 
-print("\n¡Registro exitoso! Bienvenido, " + nombre + ".")
+    if not tiene_numero:
+        print("Error: la contraseña debe tener al menos un número")
+        continue
+
+    # Si se cumple con todas las condiciones, salimos del bucle
+    break
+
+print("Contraseña válida")
+
+ver = input("¿Desea ver su contraseña? (s/n): ").strip().lower()
+if ver == "s":
+    print(f"Su contraseña es: {clave}")
+        
