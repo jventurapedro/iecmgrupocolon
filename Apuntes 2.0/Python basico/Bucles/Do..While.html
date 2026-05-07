@@ -1,0 +1,43 @@
+<html>
+
+<script>
+
+
+    // Ejemplo con While
+
+    usuario = prompt("Introduce un nombre de usuario: ");
+    numero = usuario.lenght();
+
+    // Controlamos que el usuario no este vacio
+
+    while ((numero == 0)) {
+        alert("\nNo has escrito un nombre valido")
+        usuario = prompt("Introduce un nombre de usuario: ");
+        numero = usuario.lenght();
+
+    }
+
+
+    // Ejemplo con Do..While
+
+
+
+    do {
+
+        usuario = prompt("Introduce un nombre de usuario: ");
+        numero = usuario.lenght();
+
+        // Controlamos que el usuario no este vacio
+
+        if ((numero == 0)) {
+            alert("\nNo has escrito un nombre valido")
+        }
+
+    } while ((usuario == "") || (numero == 0));
+
+
+
+
+</script>
+
+</html>
