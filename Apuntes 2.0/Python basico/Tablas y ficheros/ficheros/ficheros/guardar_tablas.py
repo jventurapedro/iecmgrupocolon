@@ -19,7 +19,7 @@ datos = list()  # Inicializamos el array de destino
 
         # Método 1 para abrir archivos
                
-archivo = open("C:/proyectos/ficheros/base_coches.csv", mode="r")
+archivo = open("ruta", mode="r")
     
 contenido=archivo.readlines()
  
@@ -122,7 +122,8 @@ filas = len(datos)
 columnas = len(datos[0])
 
 for i in range(filas):
-    if (datos[i][0]=="BMW") and 
+    if (datos[i][0]=="BMW") and (datos[i][3]=="Azul"):
+        cantidad = 1
 
 
 
