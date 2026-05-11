@@ -59,7 +59,7 @@ for i in range(len(datos)):
         suma += edad
         cantidad += 1
 
-    media = suma / cantidad
+    media = int(suma / cantidad)
 
 print ("La edad media de los alumnos es: ", media)
 
