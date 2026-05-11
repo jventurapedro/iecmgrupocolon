@@ -88,15 +88,20 @@ print("Número de alumnos de Soria: ", soria)
     #2. Provincia: dos provincias en la que buscaremos el rango de edad.
 
 #Solicitar rango de edad:
-rango_edad = int(input("Introduce el rango de edad (ejemplo: 18-65): "))
+
 while True:
+
+    rango_edad = input("Introduce el rango de edad (ejemplo: 18-65, 20-23, 25-30): ")
+
     if rango_edad == "":
         print("No se ha introducido un rango de edad válido.")
-    elif (rango_edad.isdigit() == False):
-        print("El rango de edad debe ser un número.")
-    else:
+    elif (rango_edad.count("-") != 1):
+        print("El formato del rango de edad no es correcto. Debe contener un guion entre los dos números.")
+    else:   
         rango_edad = int(rango_edad)
         break
+
+
 
 provincia1 = input("Introduce la primera provincia: ")
 
