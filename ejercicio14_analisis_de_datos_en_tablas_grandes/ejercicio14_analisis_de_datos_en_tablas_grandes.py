@@ -25,7 +25,7 @@ archivo.close()
 for i in range(len(datos)):
     linea = ""
     for j in range(numcamp + 1):  # numcamp es el número de campos, pero necesitamos iterar hasta numcamp + 1 para incluir el último campo
-        linea = linea + "{:<20}".format(datos[i][j])
+        linea = linea + "{:<15}".format(datos[i][j])
     print(linea + "\n")
 
 #REVISION! (LA ESTRUCTURA DEL LOS EJERCICIOS)
@@ -39,7 +39,7 @@ for i in range(len(datos)):
 #AHORA VAMOS A QUITAR EL ENCABEZADO PORQUE EL ENCABEZADO ES LETRA Y NO NUMERO.
 
 del datos[0]  # Elimina el primer elemento del array, que es el encabezado
-
+print("\n========== EJERCICIO ==========\n")
 #AHORA VAMOS A CALCULAR
 
 municipios_mar = 0
@@ -161,5 +161,5 @@ linea += "Densidad de población en costa: " + str(round(densidad_poblacion_cost
 linea += "Densidad de población en no costeros: " + str(round(densidad_no_costeros, 2)) + "\n"
 
 resultado.write(linea)
-
 resultado.close()
+print("Fichero resultados.txt creado correctamente")
