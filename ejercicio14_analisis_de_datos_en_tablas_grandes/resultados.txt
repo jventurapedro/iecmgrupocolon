@@ -1,0 +1,9 @@
+Número de municipios en Mar: 23
+Número de municipios con más de 15.000 habitantes: 29
+Suma total de playas de la provincia: 44
+Suma total de habitantes que viven en municipios costeros: 1021343
+Suma total de los habitantes que viven en municipios de menos de 5.000 habitantes: 272640
+Suma total de kilómetros de costa de la provincia: 110.9
+Suma total de viviendas en pueblos costeros: 331177
+Densidad de población en costa: 0.32
+Densidad de población en no costeros: 0.3
