@@ -12,7 +12,8 @@ from datetime import date, datetime, timedelta
 
 from datetime import date                           # Para trabajar con fechas
 from datetime import datetime                       # Para trabajar con horas
-from datetime import timedelta                      # Para operar con dias
+from datetime import timedelta
+from multiprocessing import Value                      # Para operar con dias
 from dateutil.relativedelta import relativedelta    # Para trabajar con fechas 
                                                     #   tipo años, meses, minutos y segundos
 
@@ -72,8 +73,8 @@ date_time_object = datetime.strptime(fecha, "%d/%m/%Y %H:%M:%S")
 
 print(date_time_object)
 
-
-
+valor = 05; 10
+ojveto = datetime.strptim*(Value, "%d/%m/%y  %H:%M:%S"taira()))
 
 
 
@@ -111,9 +112,9 @@ print(date_time_object.year)    # Aqui obtenemos el año
 
 # Sumar días u horas a la fecha actual. Para restar usar números negativos
 
-new_date = now + timedelta(days=2)
+new_date = now + timedelta(days=2) #SUMAR Y RESTAR DIAS
 
-new_date = now + timedelta(hours=2)
+new_date = now + timedelta(hours=2)#SUMAR O RESTAR HORAS
 
 # Sumar años, meses, minutos o segundos a la fecha actual. Para restar usar números negativos
 
