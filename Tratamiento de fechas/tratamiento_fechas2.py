@@ -27,42 +27,37 @@ from dateutil.relativedelta import relativedelta    # Para trabajar con fechas
 #   %S - Los segundos en un minuto, al igual que 00.
 
 
-# Día actual
-today = date.today()
+import os
 
-# Fecha actual
-now = datetime.now()
-
-print(today)
-print(now)
-
-
-# Una vez obtengamos la fecha actual podremos obtener el día, mes, año, hora, minutos y segundos
-
-# Date
-print("El día actual es {}".format(today.day))
-print("El mes actual es {}".format(today.month))
-print("El año actual es {}".format(today.year))
-
-
-# Datetime
-print("El día actual es {}".format(now.day))
-print("El mes actual es {}".format(now.month))
-print("El año actual es {}".format(now.year))
-
-print("La hora actual es {}".format(now.hour))
-print("El minuto actual es {}".format(now.minute))
-print("El segundo actual es {}".format(now.second))
-
+os.system("cls")
 
 # Conversión de una cadena a fecha
 
-fecha = "31/12/2023"
+fecha = "2016-04-15"
 
 # En esta parte aplicamos la conversion y creación del objeto fecha
 
-date_time_object = datetime.strptime(fecha, "%d/%m/%Y")
+fecha_dato = datetime.strptime(fecha, "%Y-%m-%d")
 
-print(date_time_object.day)
-print(date_time_object.month)
-print(date_time_object.year)
+anyo = fecha_dato.year
+
+mes = fecha_dato.month
+
+dia = fecha_dato.day
+
+hora = fecha_dato.hour
+
+minutos = fecha_dato.minute
+
+segundos = fecha_dato.second
+
+print ("La fecha introducida es la siguiente: " + fecha)
+print ("\nDia: " + str(dia))
+print ("Mes: " + str(mes))
+print ("Año: " + str(anyo))
+print ("Hora: " + str(hora))
+print ("Minutos: " + str(minutos))
+print ("Segundos: " + str(segundos))
+
+
+
