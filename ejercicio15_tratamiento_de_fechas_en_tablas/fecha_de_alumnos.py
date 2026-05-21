@@ -51,4 +51,5 @@ for i in range(len(datos)):
         fecha_baja = fecha_nacimiento + relativedelta(years=30)  # Calcular la fecha de baja sumando 30 años a la fecha de nacimiento
         datos [i][7] = fecha_baja.strftime("%d/%m/%Y")  # Actualizar la fecha de baja en el array con el nuevo formato
         print(f"El alumno {datos[i][0]} {datos[i][1]} es menor de 18 años, su fecha de baja será: {datos[i][7]}")
-        
+
+
