@@ -52,4 +52,12 @@ for i in range(len(datos)):
         datos [i][7] = fecha_baja.strftime("%d/%m/%Y")  # Actualizar la fecha de baja en el array con el nuevo formato
         print(f"El alumno {datos[i][0]} {datos[i][1]} es menor de 18 años, su fecha de baja será: {datos[i][7]}")
 
+# SEGUNDA PARTE DEL EJERCICIO: Para los alumnos de entre 18 y 65 años (incluyendo 18 y 65), la fecha de baja será dentro de 10 años a partir de la fecha de hoy.
 
+for i in range(len(datos)):
+    edad = int(datos[i][2])  # Convertir la edad a entero para compararla
+    if <18 <= edad <= 65:
+        fecha_hoy = datetime.now()  # Obtener la fecha actual
+        fecha_baja = fecha_hoy + relativedelta(years=10)  # Calcular la fecha de baja sumando 10 años a la fecha actual
+        datos [i][7] = fecha_baja.strftime("%d/%m/%Y")
+        print
