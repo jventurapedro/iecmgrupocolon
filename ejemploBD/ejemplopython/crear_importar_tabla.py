@@ -17,23 +17,18 @@ cursor1.execute("select * from datos;")
 
 tabla = list()
 
-
-
 for fila in cursor1:
     tabla.append(fila)
 
-longitud = len(tabla)
-ancho = len(tabla[0])
 
-
-for i in range(longitud):
+for i in range(len(tabla)):
     linea = ""
-    for j in range(ancho):
+    for j in range(len(tabla[i])):
         linea = linea + str(tabla[i][j]) + "\t"
     print(linea)
 
 
-print("\nEn la tabla datos tienes " + str(ancho)+ " campos y " + str(longitud) + " registros \n")
+print("\nEn la tabla datos tienes " + str(len(tabla[0]))+ " campos y " + str(len(tabla)) + " registros \n")
 
 conexion1.close()
 

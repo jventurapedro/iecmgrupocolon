@@ -1,49 +1,150 @@
-# Ejercicio 07 - Condicion IF Anidado
+#    hay que coger los numeros de la base de datos.
+#    utilizar el ejercicio.
+#    Del ejercicio hacer los calculos, y luego mostrar el resultado.
+#    y luego el resultado grabarlo en una tabla.
 
-import os
-os.system("cls")
+##15 Tratamiento de fechas en tablas
 
-while True:
-# Utilizamos while a principio para que el Bucle exista hasta que el usuario introduzca datos correctos
+# EMPEZAMOS POR "os import" para importar la tabla.
+import os 
 
-    #VALIDACION 1 - Momento del día (m/t/n)
+# EL FROM DATETIME IMPORT DATE ES EL CODIGO PARA TRATAR LAS FECHAS EN PYTHON
+from datetime import date, datetime, timedelta
+from dateutil.relativedelta import relativedelta
 
-    # OJO! SEPARAMOS MOMENTO Y SEXO PARA PODER VALIDARLOS POR SEPARADO, ASÍ EVITAMOS PROBLEMAS DE VALIDACIÓN
+# DEFINIMOS LA CARPETA Y EL FICHERO
+carpeta = "C:/Users/jpedr/Desktop/iecmgrupocolon/ejercicio15_tratamiento_de_fechas_en_tablas/"
+fichero = "alumnos_fechas.csv"
 
-    # --- PEDIR MOMENTO ---
-    momento = input("Ingrese el momento del día (m/t/n): ").strip().lower()
+# AHORA ESCRIBIR LA RUTA
+ruta = os.path.join(carpeta, fichero)
+ruta = os.path.abspath(ruta)
 
-    # Validar momento (evita vacío, espacios y letras incorrectas)
-    if momento not in ["m", "t", "n"]:
-        print("Error: momento no válido")
-        continue  # vuelve al inicio del while
+# PARA LEER EL FICHERO
 
-    # --- PEDIR SEXO ---
-    sexo = input("Ingrese el sexo (h/m): ").strip().lower()
+datos = list()  # Inicializamos el array de destino
 
-    # Validar sexo
-    if sexo not in ["h", "m"]:
-        print("Error: sexo no válido")
-        continue  # vuelve al inicio del while
+archivo = open(ruta, mode="r")
+contenido = archivo.readlines()
 
-    # --- IF ANIDADO (AQUI HACEMOS EL SALUDO SEGÚN LOS DATOS) ---
-    if momento == "m":
-        if sexo == "h":
-            print("Buenos días, señor")
-        else:
-            print("Buenos días, señora")
+for linea in contenido:
 
-    elif momento == "t":
-        if sexo == "h":
-            print("Buenas tardes, señor")
-        else:
-            print("Buenas tardes, señora")
+    numcamp = linea.count(";")
 
-    elif momento == "n":
-        if sexo == "h":
-            print("Buenas noches, señor")
-        else:
-            print("Buenas noches, señora")
+    registro = linea.replace('\n', '')
+    registro = registro.replace(",", ".")  # Reemplazar comas por puntos decimales
 
-    # Si todo es correcto, salir del bucle
-    break
+    datos.append(registro.split(";"))
+
+archivo.close()
+
+# VARIABLE PARA SEPARAR LOS CAMPOS
+separador = " | "
+
+# MOSTRAR LA TABLA FORMATEADA
+print("\n" + "-" * 180)
+
+for i in range(len(datos)):
+
+    linea = ""
+
+    for j in range(numcamp + 1):
+
+        linea = linea + "{:<20}".format(datos[i][j]) + separador
+
+    print(linea)
+
+print("-" * 180)
+
+# PRIMERA PARTE DEL EJERCICIO:
+# Para los menores de 18 años,
+# la fecha de baja será dentro de 30 años
+# a partir de su fecha de nacimiento.
+
+for i in range(len(datos)):
+
+    edad = int(datos[i][2])
+
+    if edad < 18:
+
+        # Convertir la fecha de nacimiento a datetime
+        fecha_nacimiento = datetime.strptime(datos[i][6], "%d/%m/%Y")
+
+        # Sumar 30 años
+        fecha_baja = fecha_nacimiento + relativedelta(years=30)
+
+        # Guardar fecha de baja
+        datos[i][7] = fecha_baja.strftime("%d/%m/%Y")
+
+        print(
+            f"El alumno {datos[i][0]} {datos[i][1]} "
+            f"es menor de 18 años, "
+            f"su fecha de baja será: {datos[i][7]}"
+        )
+
+# SEGUNDA PARTE DEL EJERCICIO:
+# Para alumnos entre 18 y 65 años
+
+for i in range(len(datos)):
+
+    edad = int(datos[i][2])
+
+    if 18 <= edad <= 65:
+
+        # Obtener fecha actual
+        fecha_hoy = datetime.now()
+
+        # Sumar 10 años
+        fecha_baja = fecha_hoy + relativedelta(years=10)
+
+        # Guardar fecha
+        datos[i][7] = fecha_baja.strftime("%d/%m/%Y")
+
+        print(
+            f"El alumno {datos[i][0]} {datos[i][1]} "
+            f"tiene entre 18 y 65 años, "
+            f"su fecha de baja será: {datos[i][7]}"
+        )
+
+# TERCERA PARTE DEL EJERCICIO:
+# Para mayores de 65 años
+
+for i in range(len(datos)):
+
+    edad = int(datos[i][2])
+
+    if edad > 65:
+
+        # Obtener fecha actual
+        fecha_hoy = datetime.now()
+
+        # Sumar 5 años
+        fecha_baja = fecha_hoy + relativedelta(years=5)
+
+        # Guardar fecha
+        datos[i][7] = fecha_baja.strftime("%d/%m/%Y")
+
+        print(
+            f"El alumno {datos[i][0]} {datos[i][1]} "
+            f"es mayor de 65 años, "
+            f"su fecha de baja será: {datos[i][7]}"
+        )
+
+# MOSTRAR TABLA FINAL CON FECHAS ACTUALIZADAS
+
+print("\n")
+print("=" * 180)
+print("TABLA FINAL ACTUALIZADA")
+print("=" * 180)
+
+for i in range(len(datos)):
+
+    linea = ""
+
+    for j in range(numcamp + 1):
+
+        linea = linea + "{:<20}".format(datos[i][j]) + separador
+
+    print(linea)
+
+print("=" * 180)
