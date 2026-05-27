@@ -5,6 +5,7 @@
 import mysql.connector
 import os   
 import csv
+from datetime import datetime
 
 os.system('cls')  # LIMPIA LA PANTALLA
 
@@ -25,126 +26,266 @@ cursor = conexion.cursor()
 # AQUI VAMOS A SOLICITAR EL DNI
 # ============================================================
 while True:
-    dni = input("Introduce el DNI del alumno: ")
 
-# ============================================================
-# AQUI VAMOS A VALIDAR SI EL DNI YA EXISTE
-# ============================================================
+    while True:
 
-    sql = "select * from alumnos where dni = %s"
+        dni = input("Introduce el DNI/NIE del alumno: ")
 
-    cursor.execute(sql, (dni,))
+        dni = dni.upper()
+    # ============================================================
+    # AQUI VAMOS A VALIDAR EL DNI/NIE
+    #=============================================================
+        if len(dni) != 9:
 
-    resultado = cursor.fetchone()
+            print("Documento Incorrecto!")
+            continue
 
-    if resultado:
+    #============================================================
+    # COMPROBAR SI ES NIE Y SI LOS 7 DIGITOS DEL MEDIO SON NUMEROS
+    #============================================================
+        elif dni[0] == "X" or dni[0] == "Y" or dni[0] == "Z":
 
-        print("ERROR - DNI repetido")
+            if dni[1:8].isdigit() == False:
 
-# ============================================================
-# AQUI VAMOS A SOLICITAR LOS DATOS
-# ============================================================
+                print("NIE Incorrecto")
+                continue
 
-    else:
+    #============================================================
+    # COMPROBAR DNI Y SI LOS 8 PRIMEROS DIGITOS SON NUMEROS
+    #============================================================
+        elif dni[0:8].isdigit() == False:
 
-        nombre = input("Introduce el nombre del alumno: ")
+            print("DNI Incorrecto")
+            continue
 
-        telefono = input("Introduce el teléfono del alumno: ")
+    #============================================================
+    # COMPROBAR SI EL DNI/NIE YA EXISTE EN LA BASE DE DATOS
+    #============================================================
+        sql = "select * from alumnos where dni = %s"
 
-# ============================================================
-# AQUI VAMOS A VALIDAR EL TAMAÑO DEL NOMBRE
-# ============================================================
+        cursor.execute(sql, (dni,))
 
-        if len(nombre) > 30:
+        resultado = cursor.fetchone()
 
-            print("El nombre no puede tener más de 30 caracteres.")
+        if resultado:
 
-# ============================================================
-# AQUI VAMOS A VALIDAR EL FORMATO DEL TELEFONO 
-# ============================================================
-
-        elif len(telefono) != 9:
-
-            print("El teléfono debe tener 9 dígitos.")
-
-# ============================================================
-# AQUI VAMOS INSERTAR ALUMNO EN LA BASE DE DATOS
-# ============================================================
+            print("DNI/NIE ya existe. Introduce otro.")
+            continue
 
         else:
 
-            sql = "INSERT INTO alumnos (dni, nombre, telefono) VALUES (%s, %s, %s)"
-
-            valores = (dni, nombre, telefono)
-
-            cursor.execute(sql, valores)
-
-            conexion.commit()
-
-            print("Alumno insertado correctamente")
-
+            print("Documento correcto")
             break
 
 # ============================================================
-# EN ESTE BLOQUE:
-# Rango de Edad: dos valores numéricos enteros que nos delimiten el rango de edad.
-# Provincia: dos provincias en la que buscaremos el rango de edad.
+# AQUI VAMOS A SOLICITAR LOS DATOS (SECUNDARIOS) DEL ALUMNO
+# ============================================================
+    while True:
+        nombre = input("Introduce el nombre del alumno: ")
+# ============================================================
+# COMPROBAR SI EL NOMBRE TIENE NUMEROS
+# ============================================================
+        numero_encontrado = False
+        for caracter in nombre:
+            if caracter.isdigit() or caracter in ".,;:'@#$%&()!?/":
+                numero_encontrado = True
+        if numero_encontrado:
+            print("El nombre contiene caracteres no permitidos.")
+        elif len(nombre) >30:
+            print("El nombre no puede tener más de 30 caracteres.")
+        else:
+            print("Nombre correcto")
+            break
+
+# ============================================================
+# AQUI VAMOS A SOLICITAR LA EDAD
+# ============================================================
+    while True:
+        edad = input("Introduce la edad: ")
+
+#=============================================================
+# COMPROBAR SI LA EDAD CONTIENE SOLO NUMEROS
+# ============================================================
+        if edad.isdigit() == False:
+            print ("La edad solo puede contener números.")
+
+        elif int(edad) < 1 or int(edad) > 121:
+            print ("La edad debe estar entre 1 y 121 años.")
+
+        else: 
+            print ("Edad correcta")
+            break
+
+# ============================================================
+# AQUI VAMOS A SOLICITAR EL NOMBRE DE LA CALLE
+# ============================================================
+    while True:
+        nombre_calle = input("Introduce el nombre de la calle: ")
+        caracter_incorrecto = False
+
+# ============================================================
+# COMPROBAR SI EL NOMBRE DE LA CALLE CONTIENE NUMEROS
+# O CARACTERES ESPECIALES
+# ============================================================
+        for caracter in nombre_calle:
+            if caracter.isdigit() or caracter in ".,;:'@#$%&()!?/":
+                caracter_incorrecto = True
+
+        if caracter_incorrecto:
+            print("La calle contine caracteres no permitidos.")
+
+        else:
+            print("Nombre de la calle correcto")
+            break
+
+# ============================================================
+# AQUI VAMOS A SOLICITAR EL NUMERO DE LA CALLE
+# ============================================================
+    while True:
+        numero_calle = input("Introduce el número de la calle: ")
+
+#=============================================================
+# COMPROBAR SI EL NUMERO DE LA CALLE CONTIENE SOLO NUMEROS
+# ============================================================
+        if " " in numero_calle:
+            print("El número de la calle no puede contener espacios.")
+    
+        elif numero_calle.isdigit() == False:
+            print("El número de la calle solo puede contener números.")
+
+        elif len(numero_calle) > 6:
+            print("El número de la calle no puede superar 6 números.")
+
+        else:
+            print("Número de la calle correcto")
+            break
+
+#=============================================================
+# AQUI VAMOS A SOLICITAR LA PROVINCIA
+#=============================================================
+    while True:
+        provincia = input("Introduce la provincia: ")
+        caracter_incorrecto = False
+        for caracter in provincia:
+            if caracter.isdigit() or caracter in ".,;:'@#$%&()!?/":
+                caracter_incorrecto = True
+
+        if caracter_incorrecto:
+            print("La provincia contine caracteres no permitidos.")
+        elif len(provincia) > 30:
+            print("La provincia no puede superar 30 caracteres.")
+        else:
+            print("Provincia correcta")
+            break
+
+#=============================================================
+# AQUI VAMOS A SOLICITAR EL TELEFONO
+#=============================================================
+    while True:
+        telefono = input("Introduce el teléfono: ")
+
+#=============================================================
+# COMPROBAR SI EL TELEFONO CONTIENE SOLO NUMEROS
+# ============================================================
+        if telefono.isdigit() == False:
+            print("El teléfono solo puede contener números.")
+        elif len(telefono) != 9:
+            print("El teléfono debe contener exactamente 9 dígitos.")
+        else:
+            print("Teléfono correcto")
+            break
+
+
+#=============================================================
+# AQUI VAMOS A SOLICITAR FECHA DE NACIMIENTO
+#=============================================================
+    while True:
+        fecha_nacimiento = input("Introduce la fecha de nacimiento (dd-mm-yyyy): ")
+        if len(fecha_nacimiento) != 10:
+            print("La fecha de nacimiento debe tener el formato dd-mm-yyyy.")
+        else:
+            dia = fecha_nacimiento[0:2]
+            mes = fecha_nacimiento[3:5]
+            año = fecha_nacimiento[6:10]
+
+
+            if dia.isdigit() == False or mes.isdigit() == False or año.isdigit() == False:
+
+                print("La fecha solo puede contener números y guiones(-).")
+
+            elif int(año) < 1900 or int(año) > datetime.now().year:
+
+                print("El año debe estar entre 1900 y la fecha actual.")
+
+            else:
+
+                print("Fecha de nacimiento correcta")
+                break
+
+#=============================================================
+# GENERAR FECHA DE ALTA
+#=============================================================
+    fecha_alta = datetime.now().strftime("%d-%m-%Y")
+
+#=============================================================
+# MOSTRAR RESUMEN DE LOS DATOS INTRODUCIDOS
+#=============================================================
+    print()
+    print("CONFIRME LOS DATOS INTRODUCIDOS")
+    print()
+
+    print("DNI/NIE:", dni)
+    print("Nombre:", nombre)
+    print("Edad:", edad)
+    print("Calle:", nombre_calle)
+    print("Número:", numero_calle)
+    print("Provincia:", provincia)
+    print("Teléfono:", telefono)
+    print("Fecha nacimiento:", fecha_nacimiento)
+    print("Fecha alta:", fecha_alta)
+
+    print()
+
+    confirmacion = input("¿Desea completar el alta? (S/N): ")
+
+#=============================================================
+# COMPROBAR LA CONFIRMACION
+#=============================================================
+    if confirmacion.upper() == "S":
+
+        sql = """INSERT INTO alumnos (dni, nombre, edad, direccion, provincia, telefono, fecha_nacimiento, fecha_alta)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
+
+        valores = (
+            dni,
+            nombre,
+            edad,
+            nombre_calle + " " + numero_calle,
+            provincia,
+            telefono,
+            fecha_nacimiento,
+            fecha_alta
+            )
+
+        cursor.execute(sql, valores)
+
+        conexion.commit()
+
+        print("Alumno insertado correctamente")
+
+        break
+
+# ============================================================
+# SOLICITAR RANGO DE EDAD Y PROVINCIAS
 # ============================================================
 
-# SOLICITAMOS LOS DATOS PARA EL RANGO DE EDAD Y LAS PROVINCIAS
+    edad_minima = int(input("Introduce la edad mínima: "))
+    edad_maxima = int(input("Introduce la edad máxima: "))
 
-edad_minima = int(input("Introduce la edad mínima: "))
-edad_maxima = int(input("Introduce la edad máxima: "))
-provincia1 = input("Introduce la primera provincia: ")
-provincia2 = input("Introduce la segunda provincia: ")
+    provincia1 = input("Introduce la primera provincia: ")
+    provincia2 = input("Introduce la segunda provincia: ")
 
-# AQUI VAMOS HACER EL SELECT
+    else:  
+    print("Reiniciando introducción de datos...")
 
-sql = """ select * from alumnos where edad between %s and %s and (provincia = %s or provincia = %s) """
-
-valor = (edad_minima, edad_maxima, provincia1, provincia2)
-cursor.execute(sql, valor)
-resultado = cursor.fetchall()
-
-# AQUI VAMOS A MOSTRAR LOS RESULTADOS
-
-if resultado: 
-    fichero = open(r"C:\Users\jpedr\Desktop\iecmgrupocolon\ejercicio16_importar_ficheros_sql\resultado16.csv", "w", newline="")
-    escribir = csv.writer(fichero, delimiter=";")
-    for fila in resultado:
-        escribir.writerow(fila)
-    fichero.close()
-
-    print()
-
-    print("HEMOS ENCONTRADO ESTOS USUARIOS:")
-
-    print()
-
-    for fila in resultado:
-
-        print("DNI:", fila[0], "- Nombre:", fila[1], "- Edad:", fila[2])
-
-    print()
-
-    print("Consulte el archivo resultado16.csv para ver todos los resultados")
-
-else:
-
-    print("No hay registro con ese filtro")
-   
-#============================================================
-# COPIA DE SEGURIDAD
-#============================================================
-
-os.chdir(r"C:\Users\jpedr\Desktop\iecmgrupocolon\ejercicio16_importar_ficheros_sql")
-
-os.system(
-    r'"C:\xampp\mysql\bin\mysqldump.exe" -u root alumnosdb > alumnosdb.sql'
-)
-
-print("Copia de seguridad realizada")
-
-
-cursor.close()
-conexion.close()
+    continue
