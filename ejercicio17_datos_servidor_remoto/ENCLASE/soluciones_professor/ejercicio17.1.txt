@@ -1,0 +1,13 @@
+125002;FACINSA;Baviera, 8;Leganes;Cliente;12150
+125003;Juana Rodriguez Peña;Camino de Santiago, 23;Madrid;Cliente;-1432.5
+125004;Pedro Salvador Marin;Coliseo, 2;Madrid;Cliente;123.5
+125005;Transportes Laredo. S.A.;Plaza Cervantes, 4;Alcala;Cliente;1456.45
+125006;Santaella y Asociados;Avda, Portugal, 87;Mostoles;Cliente;-8564.85
+125007;Juan Jose Peña Guerrero;Numancia, 12;Madrid;Cliente;562.45
+125008;Antonio Ruiz Barragan;Espartales, 32;Madrid;Cliente;2458.6
+144562;Electronica y Componentes;Paseo de la Chopera, 2;San Fernando;Proveedor;521.56
+144563;Hierros San Antonio;Crta. de Valencia, 67;Vallecas;Proveedor;2458.65
+144564;Pinturas Martin;La Peseta, 35;Leganes;Proveedor;4578.62
+144565;MAVISA. S.L.;Arroyomolinos,27;Fuenlabrada;Proveedor;-154.45
+144566;Vicente e Hijos. S.L.;Perales de Tajuña, 2;Madrid;Proveedor;985.87
+144567;Cerramientos Henriquez;Via Toledana, 23;Madrid;Proveedor;-7858.25
